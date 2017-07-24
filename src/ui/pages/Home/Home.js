@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 class Home extends Component {
   render(){
-    teturn(
+    return(
       <div>
-        2
+        Home
       </div>
     )
   }

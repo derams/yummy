@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 class Signup extends Component {
   render(){
-    teturn(
+    return(
       <div>
-        3
+        Signup
       </div>
     )
   }

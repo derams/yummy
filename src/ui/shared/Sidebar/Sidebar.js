@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom'
 class Sidebar extends Component {
   render(){
-    teturn(
+    return(
       <div className="sidbar">
         <Link to="/">Home</Link>
         <Link to="/signup">Signup</Link>
