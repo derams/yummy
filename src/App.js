@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from './ui/pages/Home/Home.js'
 import Signup from './ui/pages/Signup/Signup.js'
+import Login from './ui/pages/Login/Login.js'
 import Sidebar from './ui/shared/Sidebar/Sidebar.js'
 
 import './App.css';
@@ -16,12 +17,13 @@ class App extends Component {
       <div>
         <Router>
           <div>
-            <Sidebar>
-              <switch>
+            <Sidebar />
+              <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/signup"  component={Signup} />
-              </switch>
-            </Sidebar>
+                <Route path="/login" component={Login} />
+              </Switch>
+
           </div>
         </Router>
       </div>
