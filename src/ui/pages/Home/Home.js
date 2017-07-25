@@ -1,9 +1,24 @@
 import React, {Component} from 'react'
+import {
+  Link
+} from 'react-router-dom'
+import './Home.css'
+import logo from './logo.svg'
 class Home extends Component {
   render(){
     return(
-      <div>
-        Home
+      <div className="home">
+          <div className="hero">
+            <img src={logo} alt="logo" className="app-logo" />
+            <h1 className="title">
+                吮☞
+            </h1>
+            <p className="slogan">链接一个个小而确定的幸福</p>
+          </div>
+          <div className="actions">
+            <Link to="/signup">注册</Link>
+            <Link to="/login">登录</Link>
+          </div>
       </div>
     )
   }

@@ -3,7 +3,7 @@ class Login extends Component {
   render(){
     return(
       <div className="wrap">
-        <a href="#">三</a>
+    
         <span className="login_span">Login</span>
         <p className="title">
           <span className="enter">
