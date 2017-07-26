@@ -1,0 +1,11 @@
+.signup-content{
+  display: flex;
+  border: 2px solid yellow;
+  flex-direction: column;
+}
+.signup-content>*{
+  border:2px solid blue;
+}
+.signup-actions{
+  height: 140px;
+}

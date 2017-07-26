@@ -1,9 +1,17 @@
 import React, {Component} from 'react'
+import TitleHeader from '../../shared/TitleHeader/TitleHeader'
+
 class Login extends Component {
   render(){
     return(
-      <div className="wrap">
-    
+      <div className="">
+        <TitleHeader title="login"/>
+        <div className="">
+
+        </div>
+
+      {/* <div className="wrap login">
+
         <span className="login_span">Login</span>
         <p className="title">
           <span className="enter">
@@ -19,6 +27,7 @@ class Login extends Component {
         <a href="../Signup/Signup.js">
           没有账号？点此注册
         </a>
+      </div> */}
       </div>
     )
   }

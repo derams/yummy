@@ -13,7 +13,7 @@ class Home extends Component {
             <h1 className="title">
                 吮☞
             </h1>
-            <p className="slogan">链接一个个小而确定的幸福</p>
+            <p className="slogan">享受舌尖上艳遇</p>
           </div>
           <div className="actions">
             <Link to="/signup">注册</Link>
