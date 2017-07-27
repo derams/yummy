@@ -8,12 +8,30 @@ class Sidebar extends Component {
   state={
     isOpen:false
   }
+  closeBmMenu = () => {
+    this.setState({
+      isOpen: true
+})
+  }
   render(){
+    let authStr = (
+      <div>登录|注册</div>
+    )
+    let UserInfo = (
+      <div>
+        <Link to="" className="bm-user-left">
+          {this.props.currentUser}
+        </Link>
+        <Link to="" className="bm-user-right">
+          退出
+        </Link>
+      </div>
+    )
     return(
       <div className="sidbar">
 
         <Menu isOpen={this.state.isOpen}>
-          <div className="bm-user-inif">
+          <div className="bm-user-info">
             <img src="http://media.haoduoshipin.com/yummy/default-avatar.png" alt="avatar" />
             <div className="bm-user-auth">
               <Link to="" className="bm-user-left">

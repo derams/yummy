@@ -2,7 +2,7 @@ body{
   margin: 0;
   padding: 0;
   border: 0;
-
+    background-image: linear-gradient(-45deg,#F77062 0%,#FE5196 100%);
 }
 h1, h2, h3, p{
   margin: 0;
@@ -16,7 +16,7 @@ a {
   color:white;
   width: 90%;
   position: relative;
-  background-image: linear-gradient(-45deg,#F77062 0%,#FE5196 100%);
+
   margin: 0 auto;
 }
 .hero{

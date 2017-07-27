@@ -4,8 +4,10 @@ import Signup from './ui/pages/Signup/Signup.js'
 import Login from './ui/pages/Login/Login.js'
 import Dashboard from './ui/pages/Dashboard/Dashboard.js'
 import Sidebar from './ui/shared/Sidebar/Sidebar.js'
-
+import AlertBost from './ui/shared/AlertBost/AlertBost.js'
 import './App.css'
+import { Provider } from 'react-redux'
+import store from './Redux/store'
 import {
     BrowserRouter as Router,
     Route,
@@ -15,6 +17,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Provider>
         <Router>
           <div>
             {/* 根据链接判断组件是否显示 */}
@@ -29,6 +32,7 @@ class App extends Component {
               </Switch>
           </div>
         </Router>
+      </Provider>
       </div>
     )
   }

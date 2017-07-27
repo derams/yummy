@@ -5,3 +5,4 @@ const TitleHeader = ({title}) => (
     {title}
   </div>
 )
+export default TitleHeader

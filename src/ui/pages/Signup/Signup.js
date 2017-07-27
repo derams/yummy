@@ -4,54 +4,51 @@ import {
 } from 'react-router-dom'
 import TitleHeader from '../../shared/TitleHeader/TitleHeader'
 import axios from 'axios'
+import Settings from '../../../Settings.js'
 import './signup.css'
 class Signup extends Component {
-  handleSubmit = (e) => {
+  signup = (e) => {
     e.preventDefault()
-    axios.post('http://192.168.0.122:')
+    let username = this.username.value
+    let password = this.password.value
+
+    let data = {username,password}
+    axios.post(`${Settings.host}/user/signup`,data)
+    .then(res=>{console.log(res.data)
+      this.props.history.push('/dashboard')
+    })
   }
   render(){
     return(
-
-        <div className="signup wrap">
-        {/* <TitleHeader title="signup" /> */}
-        <div className="signup-content">
-          <div className="signup-hero">
-            <h1 className="signup-hero-title">
-              登录
-            </h1>
-            <p className="slogan">
-              链接小而确定的幸福
-            </p>
-          </div>
-          <div className="signup-form-wrap">
-            <form className="signup-form">
-
-            </form>
-          </div>
-          <div className="signup-actions">
-            Actions
-          </div>
+      <div className="signup">
+  <TitleHeader title="signup" />
+  <div className="signup-content">
+    <div className="signup-hero" >
+      <h1 className="title">
+        注册
+      </h1>
+      <p className="slogan">
+        连接小而确定的幸福
+      </p>
+    </div>
+    <form onSubmit={this.signup} className="signup-form">
+      <div className="signup-text-inputs">
+        <div className="signup-text-inputs-inner">
+          <input ref={ value=> this.username = value } type="text" placeholder="用户名" />
+          <input type="text" placeholder="Email" />
+          <input ref={ value=> this.password = value } type="password" placeholder="password" />
+          <input type="password" placeholder="再输一遍" />
         </div>
-          {/* <span className="login_span">Signup</span>
-          <p className="title">
-            <span className="enter">
-              注册
-            </span>
-            链接一个个小而确定的幸福
-          </p>
-          <from className="from" onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="用户名" className="input input_margin"/>
-            <input type="text" placeholder="Email" className="input "/>
-            <input type="text" placeholder="密码" className="input "/>
-            <input type="password" placeholder="再输入一遍" className="input"/>
-            <input type="submit" placeholder="注册" className="button" />
-          </from>
-          <a href="../Login/Login.js">
-            已有账号？点此登录
-          </a> */}
-
       </div>
+      <div className="signup-actions">
+        <button type="submit">注册</button>
+      </div>
+    </form>
+    <div className="signup-other-option">
+      <Link to="/login">已有账号？直接登录</Link>
+    </div>
+  </div>
+</div>
     )
   }
 }
