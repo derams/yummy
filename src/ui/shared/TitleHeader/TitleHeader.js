@@ -1,8 +1,11 @@
 import React from 'react'
 import './title-header.css'
-const TitleHeader = ({title}) => (
+
+const TitleHeader = ({ title }) => (
   <div className="title-header">
-    {title}
+    { title }
   </div>
 )
+
+
 export default TitleHeader

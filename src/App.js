@@ -1,40 +1,65 @@
-import React, { Component } from 'react';
-import Home from './ui/pages/Home/Home.js'
-import Signup from './ui/pages/Signup/Signup.js'
-import Login from './ui/pages/Login/Login.js'
-import Dashboard from './ui/pages/Dashboard/Dashboard.js'
-import Sidebar from './ui/shared/Sidebar/Sidebar.js'
-import AlertBost from './ui/shared/AlertBost/AlertBost.js'
+import React, { Component } from 'react'
 import './App.css'
+import Home from './ui/pages/Home/Home'
+import Signup from './ui/pages/Signup/Signup'
+import Login from './ui/pages/Login/Login'
+import Sidebar from './ui/shared/Sidebar/Sidebar'
+import Dashboard from './ui/pages/Dashboard/Dashboard'
+import AlertBox from './ui/shared/AlertBox/AlertBox'
 import { Provider } from 'react-redux'
-import store from './Redux/store'
+import store from './redux/store'
+import axios from 'axios'
+import Settings from './settings'
+import Dish from './ui/pages/Dish/Dish'
+import Cart from './ui/pages/Cart/Cart'
+import Profile from './ui/pages/Profile/Profile'
+
+
 import {
-    BrowserRouter as Router,
-    Route,
-    Switch
+  BrowserRouter as Router,
+  Route,
+  Switch
 } from 'react-router-dom'
+
 class App extends Component {
+
+  componentWillMount() {
+    let userId = localStorage.getItem('userId')
+    if(userId) {
+      axios.get(`${Settings.host}/user/${userId}`).then(
+        res => {
+          console.log('App componentWillMount...', res.data)
+          store.dispatch({ type: 'SIGN_IN', username: res.data.user.username })
+        }
+      )
+    }
+  }
   render() {
     return (
-      <div>
-        <Provider>
-        <Router>
-          <div>
-            {/* 根据链接判断组件是否显示 */}
-            <Route render={({ location }) =>{
-              return location.pathname !== '/' ? (<Sidebar />) : null
-            }} />
+      <Provider store={store}>
+        <div>
+          <AlertBox />
+          <Router>
+            <div>
+              <Route render={({ location }) => {
+                  return location.pathname !== '/' ?
+                  (<Sidebar />) : null
+                }} />
               <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/signup"  component={Signup} />
-                <Route path="/login" component={Login} />
+                <Route exact path="/" component={Home} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/login"  component={Login} />
                 <Route path="/dashboard" component={Dashboard} />
+                <Route path="/dish" component={Dish} />
+                <Route path="/cart" component={Cart} />
+                <Route path="/profile" component={Profile} />
               </Switch>
-          </div>
-        </Router>
+            </div>
+          </Router>
+        </div>
       </Provider>
-      </div>
-    )
+    );
   }
 }
-export default App;
+
+export default App

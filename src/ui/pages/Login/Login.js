@@ -1,64 +1,35 @@
-// import React, {Component} from 'react'
-// import TitleHeader from '../../shared/TitleHeader/TitleHeader'
-//
-// class Login extends Component {
-//   render(){
-//     return(
-//       // <div className="">
-//       //   <TitleHeader title="login"/>
-//       //   <div className="">
-//       //     <TitleHeader title="login" />
-//       //   </div>
-//
-//        <div className="wrap login">
-//
-//         <span className="login_span">Login</span>
-//         <p className="title">
-//           <span className="enter">
-//             登录
-//           </span>
-//           链接一个个小而确定的幸福
-//         </p>
-//         <from className="from" onSubmit={this.handleSubmit}>
-//           <input type="text" placeholder="用户名" className="input input_margin"/>
-//           <input type="password" placeholder="密码" className="input"/>
-//           <input type="submit" placeholder="登录" className="button" />
-//         </from>
-//         <a href="../Signup/Signup.js">
-//           没有账号？点此注册
-//         </a>
-//       </div>
-//
-//     )
-//   }
-// }
-// export default Login
-
-
-
-
-
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import TitleHeader from '../../shared/TitleHeader/TitleHeader'
+import './login.css'
+import axios from 'axios'
 import {
   Link
 } from 'react-router-dom'
-import TitleHeader from '../../shared/TitleHeader/TitleHeader'
-import axios from 'axios'
-import './login.css'
-import Settings from '../../../Settings.js'
-class Signup extends Component {
+import Settings from '../../../settings'
+import { connect } from 'react-redux'
+
+class Login extends Component {
+
   login = (e) => {
     e.preventDefault()
-    let username = this.username.value
-    let password = this.password.value
-    let data = {username,password}
-    axios.post(`${Settings.host}/user/login`,data)
-    .then(res=>{console.log(res.data)})
-    .catch(err=> {
+    let username = this.usernameInput.value
+    let password = this.passwordInput.value
+    let data = {
+      username, password
+    }
+    console.log('login...', data)
+    axios.post(`${Settings.host}/user/login`, data).then( res => {
+      console.log(res.data)
+      this.props.dispatch({ type: 'SIGN_IN', username: res.data.username })
+      this.props.history.push('/dashboard')
+    }).catch(err => {
       console.log(err.response.data.msg)
+      const { msg } = err.response.data
+      this.props.dispatch({ type: 'SHOW_ALERT', msg })
     })
   }
-  render(){
+
+  render() {
     return(
       <div className="login">
         <TitleHeader title="login" />
@@ -74,8 +45,8 @@ class Signup extends Component {
           <form onSubmit={this.login} className="login-form">
             <div className="login-text-inputs">
               <div className="login-text-inputs-inner">
-                <input ref={ value => this.username = value } type="text" placeholder="用户名" />
-                <input ref={ value => this.password = value } type="password" placeholder="password" />
+                <input ref={value => this.usernameInput = value} type="text" placeholder="用户名" />
+                <input ref={value => this.passwordInput = value} type="password" placeholder="password" />
               </div>
             </div>
             <div className="login-actions">
@@ -86,8 +57,9 @@ class Signup extends Component {
             <Link to="/signup">没有账号？请先注册</Link>
           </div>
         </div>
-  </div>
+      </div>
     )
   }
 }
-export default Signup
+
+export default connect(null)(Login)
