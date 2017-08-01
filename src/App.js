@@ -28,11 +28,18 @@ class App extends Component {
     if(userId) {
       axios.get(`${Settings.host}/user/${userId}`).then(
         res => {
-          console.log('App componentWillMount...', res.data)
           store.dispatch({ type: 'SIGN_IN', username: res.data.user.username })
         }
       )
     }
+
+    // LOAD_DISHES
+    axios.get(`${Settings.host}/dishes`).then(
+      res => {
+        const { dishes } = res.data
+        store.dispatch({ type: 'LOAD_DISHES', dishes })
+      }
+    )
   }
   render() {
     return (
@@ -50,7 +57,7 @@ class App extends Component {
                 <Route path="/signup" component={Signup} />
                 <Route path="/login"  component={Login} />
                 <Route path="/dashboard" component={Dashboard} />
-                <Route path="/dish" component={Dish} />
+                <Route path="/dish/:dishId" component={Dish} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/profile" component={Profile} />
               </Switch>
